@@ -1,0 +1,48 @@
+{
+  "items": [
+    { "name": "Jeruzalem", "icon": "🏰" },
+    { "name": "Betlehem", "icon": "🌟" },
+    { "name": "Nazaret", "icon": "🏡" },
+    { "name": "Kafarnaum", "icon": "⛪" },
+    { "name": "Jeriha", "icon": "🏗️" },
+    { "name": "Getsemani", "icon": "🌳" },
+    { "name": "Betanija", "icon": "🏘️" },
+    { "name": "Samárija", "icon": "🏛️" },
+    { "name": "Hebrón", "icon": "⚰️" },
+    { "name": "Gaza", "icon": "🛡️" },
+    { "name": "Sihem", "icon": "⛰️" },
+    { "name": "Cezareja", "icon": "🏛️" },
+    { "name": "Lida", "icon": "🏥" },
+    { "name": "Damask", "icon": "🛤️" },
+    { "name": "Emavs", "icon": "🚶" },
+
+    { "name": "Sinajska gora", "icon": "⛰️" },
+    { "name": "Gora Nebo", "icon": "🗻" },
+    { "name": "Gora Tabor", "icon": "🌋" },
+    { "name": "Oljska gora", "icon": "🌿" },
+    { "name": "Karmel", "icon": "🔥" },
+    { "name": "Ebal in Garizim", "icon": "🏔️" },
+
+    { "name": "Galilejsko jezero", "icon": "🌊" },
+    { "name": "Jordan", "icon": "🌊" },
+    { "name": "Slano morje", "icon": "🧂" },
+    { "name": "Zahodno morje", "icon": "🌅" },
+    { "name": "Trstično morje", "icon": "🏝️" },
+    { "name": "Gihon", "icon": "⛲" },
+
+    { "name": "Babilon", "icon": "🗼" },
+    { "name": "Sinajska puščava", "icon": "🏜️" },
+    { "name": "Puščava Paran", "icon": "🌵" },
+    { "name": "Judejska puščava", "icon": "🏜️" },
+    { "name": "Kadeš", "icon": "🏝️" },
+
+    { "name": "Rim", "icon": "🏛️" },
+    { "name": "Novo nebo in Nova zemlja", "icon": "🌏" },
+    { "name": "Tigris in Evfrat", "icon": "🌊" },
+    { "name": "Tiatira", "icon": "⛪" },
+    { "name": "Smirna", "icon": "🌿" },
+    { "name": "Efez", "icon": "🏛️" },
+    { "name": "Patmos", "icon": "🏝️" },
+    { "name": "Golgota", "icon": "✝️" }
+  ]
+}

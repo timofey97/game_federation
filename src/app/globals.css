@@ -2,20 +2,296 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+ 
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+ 
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+ 
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+ 
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+ 
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+ 
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+ 
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* Game Board Styles */
+.cell {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  border-radius: 0.5rem;
+}
+
+.cell:hover {
+  border-color: #d1d5db;
+}
+
+.cell.winning-cell {
+  cursor: not-allowed;
+}
+
+/* Menu Styles */
+.game-menu {
+  margin: auto;
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.game-menu.menu-open {
+  pointer-events: all;
+}
+
+.menu-item {
+  background: #EEEEEE;
+  border-radius: 100%;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  color: #FFFFFF;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate3d(0, 0, 0);
+  transition: transform ease-out 200ms;
+  box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
+  left: 50%;
+  top: 50%;
+  margin-left: -30px;
+  margin-top: -30px;
+  
+  border: 2px solid white;
+}
+
+.menu-item:hover {
+  background: #EEEEEE;
+  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.2);
+  color: #3290B1;
+}
+
+/* Center button styles */
+.center-button {
+  z-index: 60;
+  background-color: #6b7280 !important;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 400ms;
+  transform: translate3d(0, 0, 0) !important;
+  cursor: pointer;
+  
+  border: 2px solid white;
+}
+
+.menu-open .center-button {
+  transform: translate3d(0, 0, 0) !important;
+}
+
+.center-button:hover {
+  transform: scale(1.1, 1.1) translate3d(0, 0, 0) !important;
+}
+
+/* Delete button styles */
+.delete-button {
+  background-color: red !important;
+  transition-duration: 180ms;
+  
+  border: 2px solid white;
+}
+
+.menu-open .delete-button {
+  transform: translate3d(0, -80px, 0);
+}
+
+.delete-button:hover {
+  color: white;
+  border: 2px solid white;
+}
+
+/* Team color buttons */
+.menu-open .menu-item:not(.center-button):not(.delete-button) {
+  transition-timing-function: cubic-bezier(0.935, 0, 0.34, 1.33);
+}
+
+.menu-open .menu-item:nth-child(1) {
+  transform: translate3d(70px, -40px, 0);
+}
+
+.menu-open .menu-item:nth-child(2) {
+  transform: translate3d(70px, 40px, 0);
+}
+
+.menu-open .menu-item:nth-child(3) {
+  transform: translate3d(0, 80px, 0);
+}
+
+.menu-open .menu-item:nth-child(4) {
+  transform: translate3d(-70px, 40px, 0);
+}
+
+.menu-open .menu-item:nth-child(5) {
+  transform: translate3d(-70px, -40px, 0);
+}
+
+.menu-open .menu-item:nth-child(6) {
+  transform: translate3d(0, -80px, 0);
+}
+
+.lines {
+  width: 25px;
+  height: 3px;
+  background: #596778;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -12.5px;
+  margin-top: -1.5px;
+  transition: transform 200ms;
+}
+
+.line-1 {
+  transform: translate3d(0, -8px, 0);
+}
+
+.line-2 {
+  transform: translate3d(0, 0, 0);
+}
+
+.line-3 {
+  transform: translate3d(0, 8px, 0);
+}
+
+.menu-open:checked + .menu-open-button .line-1 {
+  transform: translate3d(0, 0, 0) rotate(45deg);
+}
+
+.menu-open:checked + .menu-open-button .line-2 {
+  transform: translate3d(0, 0, 0) scale(0.1, 1);
+}
+
+.menu-open:checked + .menu-open-button .line-3 {
+  transform: translate3d(0, 0, 0) rotate(-45deg);
+}
+
+.menu-open-button {
+  z-index: 2;
+  transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-duration: 400ms;
+  transform: scale(1.1, 1.1) translate3d(0, 0, 0);
+  cursor: pointer;
+  box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
+}
+
+.menu-open-button:hover {
+  transform: scale(1.2, 1.2) translate3d(0, 0, 0);
+}
+
+.menu-open:checked + .menu-open-button {
+  transition-timing-function: linear;
+  transition-duration: 200ms;
+  transform: scale(0.8, 0.8) translate3d(0, 0, 0);
+}
+
+.menu-open:checked ~ .menu-item {
+  transition-timing-function: cubic-bezier(0.935, 0, 0.34, 1.33);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(3) {
+  transform: translate(-50%, -50%) translate(0, -60px);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(4) {
+  transform: translate(-50%, -50%) translate(52px, -30px);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(5) {
+  transform: translate(-50%, -50%) translate(52px, 30px);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(6) {
+  transform: translate(-50%, -50%) translate(0, 60px);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(7) {
+  transform: translate(-50%, -50%) translate(-52px, 30px);
+}
+
+.menu-open:checked ~ .menu-item:nth-child(8) {
+  transform: translate(-50%, -50%) translate(-52px, -30px);
+}
+
+.menu-item {
+  transform: translate(-50%, -50%);
+  transition: all 0.1s ease 0s;
+  box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.14);
+}
+
+.menu-item:hover {
+  box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.2);
 }
