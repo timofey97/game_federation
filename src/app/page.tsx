@@ -3,7 +3,7 @@
 import { Cell, Team, WinningLine } from '@/types/game';
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { createBoard, checkWinningLines, calculateBoardSize } from '@/utils/gameLogic';
+import { createBoard, checkWinningLines } from '@/utils/gameLogic';
 import items from '@/data/items.json';
 import {
   AlertDialog,
