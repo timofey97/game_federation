@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertCircle, Upload, Save, RefreshCw } from 'lucide-react';
+import { AlertCircle, Upload, Save } from 'lucide-react';
 
 interface BoardSetupProps {
   items: GameItem[];
@@ -59,7 +59,10 @@ const BoardSetup = forwardRef<BoardSetupRef, BoardSetupProps>(({ items, onItemsU
     setEditableItems(newItems);
   };
 
-  const handleSaveItems = () => {
+  // Function defined but not used in this component
+  // It may be used later or exposed through ref
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const saveItems = () => {
     onItemsUpdate(editableItems);
     localStorage.setItem('boardItems', JSON.stringify(editableItems));
   };
@@ -81,7 +84,8 @@ const BoardSetup = forwardRef<BoardSetupRef, BoardSetupProps>(({ items, onItemsU
         } else {
           setJsonError(t('game.settings.invalidJsonFormat') || 'Invalid JSON format. Expected { items: [] }');
         }
-      } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (_) {
         setJsonError(t('game.settings.invalidJson') || 'Invalid JSON file');
       }
     };
@@ -98,12 +102,16 @@ const BoardSetup = forwardRef<BoardSetupRef, BoardSetupProps>(({ items, onItemsU
       } else {
         setJsonError(t('game.settings.invalidJsonFormat') || 'Invalid JSON format. Expected { items: [] }');
       }
-    } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
       setJsonError(t('game.settings.invalidJson') || 'Invalid JSON');
     }
   };
 
-  const handleApplyChanges = () => {
+  // Function defined but not used in this component
+  // It may be used later or exposed through ref
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const applyChanges = () => {
     onItemsUpdate(editableItems);
     localStorage.setItem('boardItems', JSON.stringify(editableItems));
   };
@@ -166,8 +174,6 @@ const BoardSetup = forwardRef<BoardSetupRef, BoardSetupProps>(({ items, onItemsU
               </div>
             ))}
           </div>
-          
-          {/* Removed Save and Apply buttons */}
         </TabsContent>
         
         <TabsContent value="json" className="space-y-4">
@@ -209,12 +215,12 @@ const BoardSetup = forwardRef<BoardSetupRef, BoardSetupProps>(({ items, onItemsU
             onChange={handleJsonContentChange}
             className="w-full h-[400px] p-2 font-mono text-sm border rounded-md dark:bg-stone-800 dark:border-gray-700"
           />
-          
-          {/* Removed Apply Changes button */}
         </TabsContent>
       </Tabs>
     </div>
   );
 });
+
+BoardSetup.displayName = 'BoardSetup';
 
 export default BoardSetup;

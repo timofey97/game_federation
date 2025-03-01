@@ -72,4 +72,6 @@ const TeamSetup = forwardRef<TeamSetupRef, TeamSetupProps>(({ teams, onTeamUpdat
   );
 });
 
+TeamSetup.displayName = 'TeamSetup';
+
 export default TeamSetup;

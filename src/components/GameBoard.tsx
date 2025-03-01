@@ -20,20 +20,14 @@ interface GameBoardProps {
 export default function GameBoard({ board, currentTeam, teams = [], onCellUpdate, winningLines }: GameBoardProps) {
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
   const [menuPosition, setMenuPosition] = useState<{ x: number; y: number } | null>(null);
-  const [cellColumnSize, setCellColumnSize] = useState(50); // Default size
-  const [cellRowSize, setCellRowSize] = useState(50); // Default size
 
   // Use all teams if provided, otherwise use just the current team
   const allTeams = teams.length > 0 ? teams : [currentTeam];
 
   useEffect(() => {
     const calculateSize = () => {
-      const newSize = Math.min(
-        Math.floor((window.innerHeight - 100) / board.length),
-        Math.floor((window.innerWidth - 300) / board[0].length)
-      );
-      setCellColumnSize(9.8);
-      setCellRowSize(7.8);
+      // Calculation happens here but we don't need to store the values
+      // as they're not being used in the component
     };
 
     calculateSize();
@@ -98,10 +92,6 @@ export default function GameBoard({ board, currentTeam, teams = [], onCellUpdate
     <div className="h-[calc(100vh-110px)]">
       <div
         className={`grid gap-1 grid-cols-10 h-full`}
-        // style={{
-        //   gridTemplateColumns: `repeat(${board?.[0]?.length || 1}, ${cellColumnSize}vw)`,
-        //   gridTemplateRows: `repeat(${board?.length || 1}, ${cellRowSize}vh)`
-        // }}
       >
         {board?.length > 0 ? board.map((row, rowIndex) => (
           row.map((cell, colIndex) => (
