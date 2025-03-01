@@ -10,17 +10,18 @@ import {
   AlertDialogTitle,
   AlertDialogDescription,
 } from "@/components/ui/alert-dialog";
+import { Dispatch, SetStateAction } from "react";
 
 interface WinDialogProps {
-  isOpen: boolean;
+  open: boolean;
+  onOpenChange: Dispatch<SetStateAction<boolean>>;
   winner: string;
-  onClose: () => void;
-  onReset: () => void;
+  onPlayAgain: () => void;
 }
 
-export function WinDialog({ isOpen, winner, onClose, onReset }: WinDialogProps) {
+export function WinDialog({ open, onOpenChange, winner, onPlayAgain }: WinDialogProps) {
   return (
-    <AlertDialog open={isOpen} onOpenChange={(open) => !open && onReset()}>
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Čestitamo!</AlertDialogTitle>
@@ -31,8 +32,8 @@ export function WinDialog({ isOpen, winner, onClose, onReset }: WinDialogProps) 
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={onClose}>Zapri</AlertDialogCancel>
-          <AlertDialogAction onClick={onReset}>Igraj Ponovno</AlertDialogAction>
+          <AlertDialogCancel onClick={() => onOpenChange(false)}>Zapri</AlertDialogCancel>
+          <AlertDialogAction onClick={onPlayAgain}>Igraj Ponovno</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
