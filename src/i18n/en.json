@@ -1,0 +1,52 @@
+{
+  "game": {
+    "title": "Federation Game",
+    "start": "Start Game",
+    "settings": {
+      "title": "Game Settings",
+      "difficulty": "Difficulty",
+      "easy": "Easy",
+      "medium": "Medium",
+      "hard": "Hard",
+      "apply": "Apply Settings",
+      "teams": "Team Settings",
+      "teamsDescription": "Configure team parameters for the game",
+      "team": "Team {index}",
+      "board": "Board Settings",
+      "boardDescription": "Configure game board parameters",
+      "boardComingSoon": "Board settings will be added soon",
+      "generateColors": "Generate Random Colors",
+      "visualEditor": "Visual Editor",
+      "jsonEditor": "JSON Editor",
+      "itemName": "Name",
+      "itemIcon": "Icon",
+      "uploadJson": "Upload JSON",
+      "downloadJson": "Download JSON",
+      "applyToBoard": "Apply to Board",
+      "applyChangesFromJson": "Apply Changes from JSON",
+      "invalidJson": "Invalid JSON file",
+      "invalidJsonFormat": "Invalid JSON format. Expected { items: [] }"
+    },
+    "win": {
+      "title": "Congratulations!",
+      "message": "You have won the game!",
+      "playAgain": "Play Again",
+      "close": "Close"
+    },
+    "items": {
+      "food": "Food",
+      "wood": "Wood",
+      "stone": "Stone",
+      "gold": "Gold"
+    },
+    "actions": {
+      "collect": "Collect",
+      "build": "Build",
+      "upgrade": "Upgrade",
+      "close": "Close",
+      "save": "Save",
+      "saveAndApply": "Save and Apply",
+      "cancel": "Cancel"
+    }
+  }
+}

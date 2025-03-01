@@ -6,16 +6,27 @@ export function calculateBoardSize(itemCount: number): number {
 
 export function createBoard(items: GameItem[], rows: number, cols: number): Cell[][] {
   const board: Cell[][] = [];
-  // Дублируем каждый элемент
-  const shuffledItems = [...items, ...items].sort(() => Math.random() - 0.5);
   
-  // Создаем пустую доску
+  // Создаем две отдельные копии предметов для каждой половины
+  const leftItems = [...items].sort(() => Math.random() - 0.5);
+  const rightItems = [...items].sort(() => Math.random() - 0.5);
+  
+  // Вычисляем середину доски
+  const midCol = Math.floor(cols / 2);
+  
+  // Создаем доску
   for (let i = 0; i < rows; i++) {
     board[i] = [];
     for (let j = 0; j < cols; j++) {
-      const itemIndex = i * cols + j;
+      // Определяем, какой набор предметов использовать (левый или правый)
+      const isLeftSide = j < midCol;
+      const currentItems = isLeftSide ? leftItems : rightItems;
+      
+      // Вычисляем индекс предмета для текущей половины
+      const itemIndex = Math.floor((i * midCol + (isLeftSide ? j : j - midCol)) % items.length);
+      
       board[i][j] = {
-        item: itemIndex < shuffledItems.length ? shuffledItems[itemIndex] : { name: '', icon: '' },
+        item: currentItems[itemIndex] || { name: '', icon: '' },
         color: undefined,
         locked: false
       };

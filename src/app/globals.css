@@ -183,15 +183,15 @@ body {
 }
 
 .menu-open .menu-item:nth-child(2) {
-  transform: translate3d(70px, 40px, 0);
+  transform: translate3d(45px, 30px, 0);
 }
 
 .menu-open .menu-item:nth-child(3) {
-  transform: translate3d(0, 80px, 0);
+  transform: translate3d(0, 60px, 0);
 }
 
 .menu-open .menu-item:nth-child(4) {
-  transform: translate3d(-70px, 40px, 0);
+  transform: translate3d(-45px, 30px, 0);
 }
 
 .menu-open .menu-item:nth-child(5) {

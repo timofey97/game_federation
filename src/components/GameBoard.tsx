@@ -11,15 +11,20 @@ const CircularMenu = dynamic(() => import('./CircularMenu'), {
 
 interface GameBoardProps {
   board: Cell[][];
-  teams: Team[];
+  currentTeam: Team;
+  teams?: Team[];
   onCellUpdate: (row: number, col: number, color?: string) => void;
   winningLines: WinningLine[];
 }
 
-export default function GameBoard({ board, teams, onCellUpdate, winningLines }: GameBoardProps) {
+export default function GameBoard({ board, currentTeam, teams = [], onCellUpdate, winningLines }: GameBoardProps) {
   const [selectedCell, setSelectedCell] = useState<{ row: number; col: number } | null>(null);
   const [menuPosition, setMenuPosition] = useState<{ x: number; y: number } | null>(null);
-  const [cellSize, setCellSize] = useState(50); // Default size
+  const [cellColumnSize, setCellColumnSize] = useState(50); // Default size
+  const [cellRowSize, setCellRowSize] = useState(50); // Default size
+
+  // Use all teams if provided, otherwise use just the current team
+  const allTeams = teams.length > 0 ? teams : [currentTeam];
 
   useEffect(() => {
     const calculateSize = () => {
@@ -27,7 +32,8 @@ export default function GameBoard({ board, teams, onCellUpdate, winningLines }: 
         Math.floor((window.innerHeight - 100) / board.length),
         Math.floor((window.innerWidth - 300) / board[0].length)
       );
-      setCellSize(newSize);
+      setCellColumnSize(9.8);
+      setCellRowSize(7.8);
     };
 
     calculateSize();
@@ -48,22 +54,21 @@ export default function GameBoard({ board, teams, onCellUpdate, winningLines }: 
     const gridRect = e.currentTarget.closest(".grid")?.getBoundingClientRect(); // Получаем координаты сетки
     const scrollX = window.scrollX || document.documentElement.scrollLeft;
     const scrollY = window.scrollY || document.documentElement.scrollTop;
-  
+    
     let x;
     if (gridRect) {
       // Смещаем `x`, чтобы учитывать границы сетки
-      x = rect.left - gridRect.left + scrollX + rect.width / 2 + 20;
+      x = rect.left + scrollX + rect.width / 2;
     } else {
-      x = rect.left + scrollX + rect.width / 2 + 20;
+      x = rect.left + scrollX + rect.width / 2;
     }
   
     const y = rect.top + scrollY + rect.height / 2 + 10;
-  
+    
     setSelectedCell({ row, col });
     setMenuPosition({ x, y });
   };
-  
-  
+
   const handleColorSelect = (color: string) => {
     if (selectedCell) {
       onCellUpdate(selectedCell.row, selectedCell.col, color);
@@ -90,30 +95,30 @@ export default function GameBoard({ board, teams, onCellUpdate, winningLines }: 
   };
 
   return (
-    <div className="relative p-4">
+    <div className="h-[calc(100vh-110px)]">
       <div
-        className="grid gap-1"
-        style={{
-          gridTemplateColumns: `repeat(${board?.[0]?.length || 1}, ${cellSize}px)`,
-          gridTemplateRows: `repeat(${board?.length || 1}, ${cellSize}px)`
-        }}
+        className={`grid gap-1 grid-cols-10 h-full`}
+        // style={{
+        //   gridTemplateColumns: `repeat(${board?.[0]?.length || 1}, ${cellColumnSize}vw)`,
+        //   gridTemplateRows: `repeat(${board?.length || 1}, ${cellRowSize}vh)`
+        // }}
       >
         {board?.length > 0 ? board.map((row, rowIndex) => (
           row.map((cell, colIndex) => (
             <button
               key={`${rowIndex}-${colIndex}`}
-              className={`relative aspect-square border rounded hover:bg-gray-50 transition-colors ${
+              className={`relative border rounded hover:bg-gray-50 transition-colors dark:bg-gray-700 ${
                 colIndex === Math.floor((board[0].length - 1) / 2) ? 'border-r-4 border-r-gray-400' : ''
               } ${
                 colIndex === Math.floor((board[0].length - 1) / 2) + 1 ? 'border-l-4 border-l-gray-400' : ''
               }`}
-              style={{ backgroundColor: cell.color || 'white' }}
+              style={{ backgroundColor: cell.color }}
               onClick={(e) => handleCellClick(rowIndex, colIndex, e)}
             >
               {cell.item.name && (
-                <div className="absolute inset-0 flex items-center justify-center">
+                <div className="">
                   <div className="text-center">
-                    <div className="text-2xl font-bold mb-1">{cell.item.name}</div>
+                    <div className="text-2xl font-bold mb-1 dark:text-white">{cell.item.name}</div>
                     {cell.item.icon && (
                       <div className="text-2xl">
                         {cell.item.icon}
@@ -125,7 +130,7 @@ export default function GameBoard({ board, teams, onCellUpdate, winningLines }: 
 
               {isCellInWinningLine(rowIndex, colIndex) && (
                 <div className="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-                  <Lock className="w-6 h-6 text-white" />
+                  <Lock className="w-6 h-6 text-white " />
                 </div>
               )}
             </button>
@@ -136,7 +141,7 @@ export default function GameBoard({ board, teams, onCellUpdate, winningLines }: 
       {menuPosition && selectedCell && (
         <CircularMenu
           position={menuPosition}
-          teams={teams}
+          teams={allTeams}
           onColorSelect={handleColorSelect}
           onReset={handleReset}
           onClose={handleMenuClose}

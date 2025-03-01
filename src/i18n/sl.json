@@ -1,0 +1,52 @@
+{
+  "game": {
+    "title": "Igra Federacija",
+    "start": "Začni Igro",
+    "settings": {
+      "title": "Nastavitve Igre",
+      "difficulty": "Težavnost",
+      "easy": "Lahko",
+      "medium": "Srednje",
+      "hard": "Težko",
+      "apply": "Uporabi Nastavitve",
+      "teams": "Nastavitve Ekip",
+      "teamsDescription": "Konfigurirajte parametre ekip za igro",
+      "team": "Ekipa {index}",
+      "board": "Nastavitve Plošče",
+      "boardDescription": "Konfigurirajte parametre igralne plošče",
+      "boardComingSoon": "Nastavitve plošče bodo dodane kmalu",
+      "generateColors": "Naključne Barve",
+      "visualEditor": "Vizualni Urejevalnik",
+      "jsonEditor": "JSON Urejevalnik",
+      "itemName": "Ime",
+      "itemIcon": "Ikona",
+      "uploadJson": "Naloži JSON",
+      "downloadJson": "Prenesi JSON",
+      "applyToBoard": "Uporabi na Plošči",
+      "applyChangesFromJson": "Uporabi Spremembe iz JSON",
+      "invalidJson": "Neveljavna JSON datoteka",
+      "invalidJsonFormat": "Neveljaven format JSON. Pričakovano { items: [] }"
+    },
+    "win": {
+      "title": "Čestitke!",
+      "message": "Zmagali ste igro!",
+      "playAgain": "Igraj Ponovno",
+      "close": "Zapri"
+    },
+    "items": {
+      "food": "Hrana",
+      "wood": "Les",
+      "stone": "Kamen",
+      "gold": "Zlato"
+    },
+    "actions": {
+      "collect": "Zberi",
+      "build": "Zgradi",
+      "upgrade": "Nadgradi",
+      "close": "Zapri",
+      "save": "Shrani",
+      "saveAndApply": "Shrani in Uporabi",
+      "cancel": "Prekliči"
+    }
+  }
+}
